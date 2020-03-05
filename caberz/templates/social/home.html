@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Display map navigation controls</title>
+<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+<script src="https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.js"></script>
+<link href="https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.css" rel="stylesheet" />
+<style>
+	body { margin: 0; padding: 0; }
+	#map { position: absolute; top: 10%; bottom: 0; margin-left:15%; width: 50%; height: 50%; }
+</style>
+</head>
+<body>
+    <div><form method="POST">
+        {% csrf_token%}
+        {{form}}
+        {{driver_list}}
+    </form>
+</div>
+<div id="map"></div>
+<script>
+	mapboxgl.accessToken = '{{mapbox_access_token}}';
+var map = new mapboxgl.Map({
+container: 'map', // container id
+style: 'mapbox://styles/mapbox/streets-v11',
+//center: [78.8718,  21.7679], // starting position
+center: [80,16],
+zoom: 6 // starting zoom
+});
+ 
+// Add zoom and rotation controls to the map.
+map.addControl(new mapboxgl.NavigationControl());
+</script>
+ 
+</body>
+</html>
